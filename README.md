@@ -54,3 +54,22 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+## Deploy on Vercel
+
+A local SQLite file does not persist on Vercel, so use a remote libSQL database (Turso).
+
+1. Create the database (region `aws-ap-south-1` Mumbai matches the function region `bom1`):
+   ```sh
+   turso db create voice-khata --location aws-ap-south-1
+   turso db show voice-khata --url          # libsql://...
+   turso db tokens create voice-khata       # auth token
+   ```
+2. Create the tables once from your machine:
+   ```sh
+   DATABASE_URL=libsql://... DATABASE_AUTH_TOKEN=... bunx drizzle-kit push
+   ```
+3. Import the repo in Vercel and set these environment variables: `DATABASE_URL`, `DATABASE_AUTH_TOKEN`, `SARVAM_API_KEY`.
+4. Deploy. The app has no auth, so anyone with the URL can use it and spend your Sarvam credits. Turn on Vercel Deployment Protection (or add auth) before sharing the link.
+
+The microphone needs HTTPS, which Vercel provides.

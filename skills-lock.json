@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "shadcn-svelte": {
+      "source": "huntabyte/shadcn-svelte",
+      "sourceType": "github",
+      "skillPath": "skills/shadcn-svelte/SKILL.md",
+      "computedHash": "95672fb24e9a9bd860d15ab3652d1fdbe422af9c1f08080e1199925fed809be1"
+    },
+    "unslop": {
+      "source": "poteto/noodle",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/unslop/SKILL.md",
+      "computedHash": "d9fde1bd952d0df7dfa169446dc9a5c0cd36ca4bf3447cb485352be233aebf91"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "d8e7d3afe37dcc8a97b99ffb5afdb4d0919ae0092ea8b68f44eb201f035e33ac"
+    }
+  }
+}

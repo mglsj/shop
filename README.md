@@ -1,75 +1,21 @@
-# sv
+# Voice Khata
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A voice-first ledger for Indian shopkeepers. Instead of writing udhaar (credit) entries in a notebook, the shopkeeper speaks in Hindi or English: "Ramesh ne do kilo chawal udhaar liya". The app transcribes the speech, works out the customer, items and amounts, asks when something is unclear, and records it.
 
-## Creating a project
+Built for the Sarvam AI challenge using Sarvam's speech-to-text, text-to-speech and language models.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## What it does
 
-```sh
-# create a new project
-npx sv create my-app
-```
+- **Speak to record:** sales (paid or on tab) and payments received, by voice.
+- **Asks when unsure:** whether a sale was cash or on tab, which customer was meant, whether to add a new customer. Questions are spoken aloud and can be answered by voice or by button.
+- **Tabs:** see who owes how much, customer history, mark paid, undo any entry.
+- **Ask by voice:** "kiska kitna baaki hai" is answered from the ledger and spoken back.
+- **Reminders:** a ready-made WhatsApp message for each customer with a balance.
+- **Stock:** a simple list of items with prices and stock counts.
+- **Hindi and English:** the shopkeeper picks a language on first use.
 
-To recreate this project with the same configuration:
+No login: it is a single-shop app.
 
-```sh
-# recreate this project
-bun x sv@1.1.1 create --template minimal --types ts --add tailwindcss="plugins:typography,forms" sveltekit-adapter="adapter:auto" drizzle="database:sqlite+sqlite:libsql" ai-tools="ide:claude-code,vscode+delivery:tools+tools:mcp,svelte-code-writer,svelte-core-bestpractices,svelte-file-editor+mcpSetup:local" --install bun shop
-```
+## Stack
 
-## Adding features
-
-Add features to your project with `sv add`:
-
-```sh
-npx sv add
-```
-
-For example, to add Tailwind CSS:
-
-```sh
-npx sv add tailwindcss
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
-
-## Deploy on Vercel
-
-A local SQLite file does not persist on Vercel, so use a remote libSQL database (Turso).
-
-1. Create the database (region `aws-ap-south-1` Mumbai matches the function region `bom1`):
-   ```sh
-   turso db create voice-khata --location aws-ap-south-1
-   turso db show voice-khata --url          # libsql://...
-   turso db tokens create voice-khata       # auth token
-   ```
-2. Create the tables once from your machine:
-   ```sh
-   DATABASE_URL=libsql://... DATABASE_AUTH_TOKEN=... bunx drizzle-kit push
-   ```
-3. Import the repo in Vercel and set these environment variables: `DATABASE_URL`, `DATABASE_AUTH_TOKEN`, `SARVAM_API_KEY`.
-4. Deploy. The app has no auth, so anyone with the URL can use it and spend your Sarvam credits. Turn on Vercel Deployment Protection (or add auth) before sharing the link.
-
-The microphone needs HTTPS, which Vercel provides.
+SvelteKit, Svelte 5, TypeScript, Tailwind, shadcn-svelte, Drizzle with libSQL (SQLite or Turso), Bun, Sarvam AI APIs.
